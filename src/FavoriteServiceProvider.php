@@ -3,7 +3,6 @@
 namespace Ofaws\Favorite;
 
 use Illuminate\Support\Facades\Route;
-use ofaws\Favorite\Commands\FavoriteCommand;
 use Spatie\LaravelPackageTools\Commands\InstallCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
@@ -21,7 +20,6 @@ class FavoriteServiceProvider extends PackageServiceProvider
             ->name('favorite')
             ->hasConfigFile()
             ->hasMigration('create_favorite_table')
-            ->hasCommand(FavoriteCommand::class)
             ->hasInstallCommand(function (InstallCommand $command) {
                 $command
                     ->publishConfigFile()

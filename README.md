@@ -17,7 +17,7 @@ composer require ofaws/favorite
 
 Then run the installation command:
 ```bash
-php artisan prompt-center:install
+php artisan favorite:install
 ```
 
 You can publish and run the migrations with:
