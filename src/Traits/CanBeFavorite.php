@@ -23,7 +23,10 @@ trait CanBeFavorite
     {
         $query->addSelect(['is_favorite' => Favorite::select('id')
             ->where('user_id', auth()->id())
-            ->whereColumn('asset_type', get_class($this))
+            ->where(fn ($q) => $q
+                ->where('asset_type', get_class($this))
+                ->orWhere('asset_type', class_basename($this))
+            )
             ->whereColumn('asset_id', $this->table.'.id')
             ->take(1),
         ]);
