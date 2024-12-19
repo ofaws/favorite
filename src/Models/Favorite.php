@@ -41,4 +41,15 @@ class Favorite extends Model
     {
         $query->where('user_id', $userId);
     }
+
+    public function scopeFiltered(Builder $query): void
+    {
+        $query
+            ->when(request('asset'), fn (Builder $query, string $type) => $query
+                ->where('asset_type', preg_replace('/[^A-Za-z\-_]/', '', $type))
+            )
+            ->when(request('assets'), fn (Builder $query, array $types) => $query
+                ->whereIn('asset_type', array_intersect(array_keys(config('favorite.morph_map'), $types)))
+            );
+    }
 }

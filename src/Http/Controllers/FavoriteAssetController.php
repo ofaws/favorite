@@ -16,6 +16,7 @@ class FavoriteAssetController
     {
         return FavoriteResource::collection(auth()->user()
             ->favorites()
+            ->filtered()
             ->withConstrainedAsset()
             ->orderBy('position')
             ->orderByDesc('id')
