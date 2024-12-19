@@ -38,9 +38,15 @@ It is very important to set the 'assets' and 'morph_map' values in the config fi
 
 ## Usage
 
-Add ``HasFavorites`` trait to your user model and ```CanBeFavorite``` trait to assets models.
+Add `HasFavorites` trait to your user model and `CanBeFavorite` trait to assets models.
 Don't forget to add assets models to 'assets' and 'morph_map' values in the config file if you aim to use controller 
 provided by this package
+
+In order to use `filtered` scope within package's favorites controller you must ensure that each model using 
+`CanBeFavorite` trait has a `type` column in corresponding table.
+
+You can also add `filterByFavorite()` method to query builder of a model using `CanBeFavorite` trait - it will add
+the `filtered` filter which can be true or false.
 
 You can check the available endpoints by running the command below. Package will publish the routes while installation.
 ```bash

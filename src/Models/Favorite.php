@@ -49,7 +49,15 @@ class Favorite extends Model
                 ->where('asset_type', preg_replace('/[^A-Za-z\-_]/', '', $type))
             )
             ->when(request('assets'), fn (Builder $query, array $types) => $query
-                ->whereIn('asset_type', array_intersect(array_keys(config('favorite.morph_map'), $types)))
+                ->whereIn('asset_type', array_intersect(array_keys(config('favorite.morph_map')), $types))
+            )
+            ->when(request('asset_type'), fn (Builder $query, string $type) => $query
+                ->whereHas('asset', fn (Builder $query) => $query
+                    ->where('type', preg_replace('/[^A-Za-z\-_]/', '', $type)))
+            )
+            ->when(request('asset_types'), fn (Builder $query, array $types) => $query
+                ->whereHas('asset', fn (Builder $query) => $query
+                    ->whereIn('type', array_intersect(array_keys(config('favorite.morph_map')), $types)))
             );
     }
 }
