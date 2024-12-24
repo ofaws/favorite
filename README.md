@@ -61,6 +61,10 @@ If you aim to use only the relations set by this package - check the traits to s
 composer test
 ```
 
+## Documentation
+
+Please see [DOCUMENTATION](DOCUMENTATION.md) for more information on how to use package features.
+
 ## Changelog
 
 Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed recently.
